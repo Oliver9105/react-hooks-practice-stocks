@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Stock from "./Stock";
 
-
 const StockContainer = () => {
   const [stocks, setStocks] = useState([]);
   const [portfolio, setPortfolio] = useState([]);
-  const [sortedBy, setSortedBy] = useState("ticker");
   const [filterType, setFilterType] = useState("");
+
   useEffect(() => {
     fetch("http://localhost:3001/stocks")
       .then((response) => response.json())
@@ -25,7 +24,6 @@ const StockContainer = () => {
   };
 
   const handleSort = (criteria) => {
-    setSortedBy(criteria);
     const sortedStocks = [...stocks];
     if (criteria === "ticker") {
       sortedStocks.sort((a, b) => a.ticker.localeCompare(b.ticker));
